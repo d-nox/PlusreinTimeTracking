@@ -46,4 +46,16 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+    
+    
 };
+
+function loginButtonClicked()
+    {
+        console.log('Received Event: ');
+        alert('TestMessage');
+        var win = window.open('/Users/fauer/git/PlusRein-Timetracking/PRTT/www/homescreen.html', '_blank');
+        win.focus();
+    }
+
+
