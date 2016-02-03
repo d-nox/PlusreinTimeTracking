@@ -18,25 +18,29 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         this.bindEvents();
+        $.support.cors = true;
+        $.mobile.phonegapNavigationEnabled = true;
+        $.mobile.allowCrossDomainPages = true;
+        $.mobile.ajaxEnabled = false;
+        $.mobile.linkBindingEnabled = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
+    bindEvents: function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    onDeviceReady: function () {
+        StatusBar.overlaysWebView(false);
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -45,13 +49,9 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
-    
-    
-};
+    },
 
-function loginButtonClicked()
-    {
+    loginButtonClicked: function () {
         console.log('Received Event: ');
         alert('TestMessage');
         var win = window.open('/Users/fauer/git/PlusRein-Timetracking/PRTT/www/homescreen.html', '_blank');
@@ -59,3 +59,4 @@ function loginButtonClicked()
     }
 
 
+};
