@@ -28,9 +28,16 @@ timeTrackApp.config(function ($routeProvider) {
 });
 
 // create the controller and inject Angular's $scope
-timeTrackApp.controller('loginController', function ($scope) {
+timeTrackApp.controller('loginController', function ($scope, $http) {
     // create a message to display in our view
     $scope.PageTitle = 'Login';
+    $scope.login = function () {
+        $http.get('http://www.plusrein.at/dev/TimeTracking')
+            .success(function (data) {
+                alert(data[0].Username);
+            });
+    };
+
 });
 
 timeTrackApp.controller('aboutController', function ($scope) {
