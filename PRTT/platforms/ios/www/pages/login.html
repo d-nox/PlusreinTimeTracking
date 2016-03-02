@@ -1,4 +1,7 @@
 <input ng-model="username" id="username" type="text" placeholder="Username" />
-<input ng-model="passowrd" id="password" type="password" placeholder="Passwort" />
-<input id="submitButton" type="button" value="Login" ng-click="login()" />
+<input ng-model="password" id="password" type="password" placeholder="Passwort" />
+<label ng-model="savePassword" id="savePassword" >
+    <input type="checkbox" name="savePassword" data-mini="true">Passwort merken
+</label>
+<input id="submitButton" type="button" value="Login" ng-click="login();" />
 <input id="resetButton" type="reset" value="Zurücksetzten" />

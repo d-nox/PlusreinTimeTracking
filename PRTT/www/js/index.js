@@ -23,7 +23,7 @@ var app = {
         $.support.cors = true;
         $.mobile.phonegapNavigationEnabled = true;
         $.mobile.allowCrossDomainPages = true;
-        $.mobile.ajaxEnabled = false;
+        $.mobile.ajaxEnabled = true;
         $.mobile.linkBindingEnabled = false;
         $.mobile.hashListeningEnabled = false;
         $.mobile.pushStateEnabled = false;
@@ -34,6 +34,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("online", this.onOnline, false);
     },
     // deviceready Event Handler
     //
@@ -51,12 +52,8 @@ var app = {
         console.log('Received Event: ' + id);
     },
 
-    loginButtonClicked: function () {
-        console.log('Received Event: ');
-        alert('TestMessage');
-        var win = window.open('/Users/fauer/git/PlusRein-Timetracking/PRTT/www/homescreen.html', '_blank');
-        win.focus();
-    }
+    onOnline: function (){
 
+    }
 
 };

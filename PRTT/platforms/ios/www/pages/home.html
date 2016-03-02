@@ -1,21 +1,21 @@
-<h1>Logged in as ...</h1>
+<h3>Logged in as {{username}}</h3>
 <div>
     <label for="startTime">Startzeit: </label>
-    <input id="startTime" type="time"></input>
+    <input id="startTime" type="time" />
 </div>
 <div>
     <label for="endTime">Endzeit: </label>
-    <input id="endTime" type="time"></input>
+    <input id="endTime" type="time" />
 </div>
 <div>
-    Auftragsort:
-    <select name="auftragsortCombobox">
-        <option>Halle1</option>
-        <option>Halle2</option>
-        <option>Halle3</option>
-        <option>Halle4</option>
-        <option>Halle5</option>
+    <label for="auftragsortCombobox" class="select">Auftragsort:</label>
+    <select name="auftragsortCombobox" id="auftragsortCombobox" ng-repeat="employer in employers">
+        <option value="employer.Id">{{employer.Name}}</option>
     </select>
+    <div ng-repeat="employer in employers">
+        <p>{{employer.Name}}</p>
+    </div>
 </div>
-<input id="timeTrackSend" type="button" value="Bestätigen" />
+<div>
+    <input id="timeTrackSend" type="button" value="Bestätigen" />
 </div>

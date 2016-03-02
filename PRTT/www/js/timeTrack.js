@@ -15,9 +15,9 @@ timeTrackApp.config(function ($routeProvider) {
     })
 
     // route for the about page
-    .when('/about', {
-        templateUrl: 'pages/about.html',
-        controller: 'aboutController'
+    .when('/home', {
+        templateUrl: 'pages/home.html',
+        controller: 'homeController'
     })
 
     // route for the contact page
@@ -31,19 +31,52 @@ timeTrackApp.config(function ($routeProvider) {
 timeTrackApp.controller('loginController', function ($scope, $http) {
     // create a message to display in our view
     $scope.PageTitle = 'Login';
-    $scope.login = function () {
-        $http.get('http://www.plusrein.at/dev/TimeTracking')
+    if (localStorage['Username'] !== "" && localStorage['Password'] !== "") {
+        $scope.username = localStorage['Username'];
+        $scope.password = localStorage['Password'];
+    }
+    if ($scope.username !== "" && $scope.password !== "") {
+        $http.get('http://www.plusrein.at/dev/TimeTracking?Username=' + $scope.username + '&Password=' + $scope.password)
             .success(function (data) {
-                alert(data[0].Username);
+                if (data['status'] === 'OK') {
+                    window.location.href = "#/home";
+                } else {
+                    alert(data['message']);
+                }
+            });
+    }
+    $scope.login = function () {
+        $http.get('http://www.plusrein.at/dev/TimeTracking?Username=' + $scope.username + '&Password=' + $scope.password)
+            .success(function (data) {
+                if (data['status'] === 'OK') {
+                    localStorage['Username'] = $scope.username;
+                    localStorage['Password'] = $scope.password;
+                    window.location.href = "#/home";
+                } else {
+                    alert(data['message']);
+                }
             });
     };
+    $('#mainContent').trigger('create');
 
 });
 
-timeTrackApp.controller('aboutController', function ($scope) {
-    $scope.message = 'Look! I am an about page.';
+timeTrackApp.controller('homeController', function ($scope, $http) {
+    $http.get('http://www.plusrein.at/dev/TimeTracking?Username=' + localStorage['Username'] + '&Password=' + localStorage['Password'] + '&GetAllEmployer=true')
+        .success(function (data) {
+            if (data['status'] === 'OK') {
+                $scope.employers = data['employer'];
+            } else {
+                alert(data['status'] + " -  " + data['message']);
+            }
+        })
+    .error(function (data, status) {
+        alert(status + " - " + data);
+    });
+    $('#mainContent').trigger('create');
 });
 
 timeTrackApp.controller('contactController', function ($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
+    $('#mainContent').trigger('create');
 });
